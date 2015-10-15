@@ -60,9 +60,9 @@
             <TextBox Text="{Binding Login}" Grid.Column="1" Grid.Row="1" Margin="5" Width="200"/>
 
             <Label Content="Password" Grid.Column="0" Grid.Row="2" />
-            <PasswordBox PasswordChar="*" Grid.Column="1" Grid.Row="2" Margin="5"  Width="200"/>
+            <PasswordBox x:Name="RegisterPsw" PasswordChar="*" Grid.Column="1" Grid.Row="2" Margin="5"  Width="200"/>
 
-            <Button Content="Ok" Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=SignInPsw}" Grid.Column="1" HorizontalAlignment="Right" Grid.Row="3" Margin="5" Width="50"/>
+            <Button Content="Ok" Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=RegisterPsw}" Grid.Column="1" HorizontalAlignment="Right" Grid.Row="3" Margin="5" Width="50"/>
             
             <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right">
                 <Hyperlink Command="{Binding ToSignInCommand}">

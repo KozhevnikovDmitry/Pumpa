@@ -151,7 +151,7 @@ namespace Pumpa
             }
             else
             {
-                MessageBox.Show("Wron login or password");
+                MessageBox.Show("Wrong login or password");
             }
 
         }
@@ -189,7 +189,7 @@ namespace Pumpa
             }
             else
             {
-                MessageBox.Show("Wron login or password");
+                MessageBox.Show("Wrong login or password");
             }
 
             _vm.IsSignOut = true;
