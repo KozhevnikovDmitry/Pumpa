@@ -1,23 +1,26 @@
-﻿using System;
+﻿using Pumpa.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Pumpa
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public MainViewModel()
+
+        public MainViewModel(AuthService authService)
         {
             Login = "Olololo";
             IsSignIn = true;
             IsSignOut = IsRegister = false;
-            SignInCommand = new SignInCommand(this);
+            SignInCommand = new SignInCommand(this, authService);
             SignOutCommand = new SignOutCommand(this);
-            RegisterCommand = new RegisterCommand(this);
+            RegisterCommand = new RegisterCommand(this, authService);
             ToSignInCommand = new ToSignInCommand(this);
             ToRegisterCommand = new ToRegisterCommand(this);
         }
@@ -129,8 +132,11 @@ namespace Pumpa
     {
         private readonly MainViewModel _vm;
 
-        public SignInCommand(MainViewModel vm)
+        private readonly AuthService _authService;
+
+        public SignInCommand(MainViewModel vm, AuthService authService)
         {
+            _authService = authService;
             _vm = vm;
         }
         public void Execute(object arg)
@@ -138,8 +144,16 @@ namespace Pumpa
             var password = (arg as PasswordBox).Password;
             var login = _vm.Login;
 
-            _vm.IsSignOut = true;
-            _vm.IsSignIn = _vm.IsRegister = false;
+            if(_authService.SignIn(login, password))
+            {
+                _vm.IsSignOut = true;
+                _vm.IsSignIn = _vm.IsRegister = false;
+            }
+            else
+            {
+                MessageBox.Show("Wron login or password");
+            }
+
         }
 
         public bool CanExecute(object arg)
@@ -150,12 +164,16 @@ namespace Pumpa
         public event EventHandler CanExecuteChanged;
     }
 
+
     public class RegisterCommand : System.Windows.Input.ICommand
     {
-        private readonly MainViewModel _vm;
+         private readonly MainViewModel _vm;
 
-        public RegisterCommand(MainViewModel vm)
+        private readonly AuthService _authService;
+
+        public RegisterCommand(MainViewModel vm, AuthService authService)
         {
+            _authService = authService;
             _vm = vm;
         }
         public void Execute(object arg)
@@ -163,6 +181,16 @@ namespace Pumpa
             var password = (arg as PasswordBox).Password;
             var login = _vm.Login;
 
+
+            if (_authService.Register(login, password))
+            {
+                _vm.IsSignOut = true;
+                _vm.IsSignIn = _vm.IsRegister = false;
+            }
+            else
+            {
+                MessageBox.Show("Wron login or password");
+            }
 
             _vm.IsSignOut = true;
             _vm.IsSignIn = _vm.IsRegister = false;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pumpa.Datalayer;
+using Pumpa.Domain;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,7 +18,7 @@ namespace Pumpa
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            var mainVm = new MainViewModel();
+            var mainVm = new MainViewModel(new AuthService(new AuthRepository()));
             var mainWindow = new MainWindow();
             mainWindow.DataContext = mainVm;
             mainWindow.ShowDialog();

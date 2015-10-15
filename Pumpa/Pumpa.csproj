@@ -95,6 +95,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pumpa.Domain\Pumpa.Domain.csproj">
+      <Project>{224208aa-ec6c-42fe-9ba3-1beed5a13629}</Project>
+      <Name>Pumpa.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="Pumpa.Datalayer\Pumpa.Datalayer.csproj">
+      <Project>{339be0fd-1573-4f1a-9930-9a1fe02767c6}</Project>
+      <Name>Pumpa.Datalayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
