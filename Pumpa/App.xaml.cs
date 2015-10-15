@@ -13,5 +13,13 @@ namespace Pumpa
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            var mainVm = new MainViewModel();
+            var mainWindow = new MainWindow();
+            mainWindow.DataContext = mainVm;
+            mainWindow.ShowDialog();
+        }
     }
 }
